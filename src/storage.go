@@ -108,13 +108,13 @@ func (this *OriginPriceContainer) InsertPrice(priceBody PriceBody) {
 
 type Storage struct {
 	originMap map[string]*OriginPriceContainer
-	mutex    *sync.Mutex
+	mutex     *sync.Mutex
 }
 
 func NewStorage() *Storage {
 	return &Storage{
 		originMap: map[string]*OriginPriceContainer{},
-		mutex:   &sync.Mutex{},
+		mutex:     &sync.Mutex{},
 	}
 }
 

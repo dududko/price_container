@@ -6,12 +6,12 @@ type MaxHeap struct {
 	MinHeap
 }
 
-func (h MinHeap) Len() int           { return len(h) }
+func (h MinHeap) Len() int { return len(h) }
 
 func (h MinHeap) Less(i, j int) bool { return h[i].price < h[j].price }
 
-func (h MinHeap) Swap(i, j int)      { 
-	h[i], h[j] = h[j], h[i] 
+func (h MinHeap) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
 	h[i].id = i
 	h[j].id = j
 }
