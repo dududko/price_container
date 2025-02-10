@@ -108,19 +108,23 @@ func (this *OriginPriceContainer) InsertPrice(priceBody PriceBody) {
 
 type Storage struct {
 	originMap map[string]*OriginPriceContainer
+	mutex    *sync.Mutex
 }
 
 func NewStorage() *Storage {
 	return &Storage{
 		originMap: map[string]*OriginPriceContainer{},
+		mutex:   &sync.Mutex{},
 	}
 }
 
 func (s *Storage) InsertPrice(priceBody PriceBody) {
 	// insert price into storage
+	s.mutex.Lock()
 	if _, ok := s.originMap[priceBody.Origin]; !ok {
 		s.originMap[priceBody.Origin] = NewOriginPriceContainer(10)
 	}
+	s.mutex.Unlock()
 	s.originMap[priceBody.Origin].InsertPrice(priceBody)
 }
 
